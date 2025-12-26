@@ -1,0 +1,211 @@
+You are an expert Full-Stack Web Developer.
+
+Generate a complete full-stack web application prototype using Firebase.
+
+PROJECT TITLE:
+Stock Trading Simulation Platform with Machine Learning–Based Price Prediction
+
+PROJECT GOAL:
+Build a web-based stock trading simulation platform that allows users to securely register and log in, simulate stock trading using real market data, manage a virtual portfolio, and view a basic Machine Learning (Linear Regression)–based stock price prediction with a graph comparing actual vs predicted prices.
+
+This project is strictly EDUCATIONAL and uses virtual money only.
+
+────────────────────────────────────────
+1. TECH STACK (MANDATORY)
+────────────────────────────────────────
+Frontend:
+- HTML, CSS, JavaScript
+- Responsive UI
+- Chart.js (or similar) for stock-style line graphs
+
+Backend:
+- Firebase Authentication
+- Firebase Cloud Firestore
+- Firebase Cloud Functions (Node.js)
+
+External API:
+- Alpha Vantage API for real-time and historical stock prices
+
+Machine Learning:
+- Basic Linear Regression
+- Implemented in JavaScript (educational only)
+
+────────────────────────────────────────
+2. AUTHENTICATION & ACCESS CONTROL (CRITICAL)
+────────────────────────────────────────
+Implement secure authentication using Firebase Authentication.
+
+Rules:
+- Login using Email or Username + Password
+- Passwords must NEVER be stored in plain text
+- Firebase Authentication must handle hashing and session tokens
+- Use Firebase Auth state listeners to track login status
+
+Access Control:
+- Only authenticated users can access protected pages
+- Redirect rules:
+  - Unauthenticated users → Login page
+  - Authenticated users → Dashboard
+- Logout must clear auth session and redirect to Home or Login
+
+────────────────────────────────────────
+3. PAGE FLOW & REDIRECTION
+────────────────────────────────────────
+
+Home / Landing Page (Public):
+- Project overview
+- Login and Register buttons
+- Simulation disclaimer
+- Redirect logged-in users to Dashboard
+
+Registration Page (Public):
+- Fields:
+  - Full Name
+  - Email (unique)
+  - Username (unique)
+  - Password
+- Validate inputs
+- Prevent duplicate email/username
+- On success → redirect to Login page
+
+Login Page (Public):
+- Email/Username + Password
+- Authenticate using Firebase Auth
+- On success → Dashboard
+- On failure → show error message
+
+Dashboard (Protected):
+- Welcome message
+- Virtual balance
+- Portfolio summary
+- Navigation links:
+  - Stock Search
+  - Trade
+  - Portfolio
+  - ML Prediction
+- Block access if not authenticated
+
+Stock Search Page (Protected):
+- Search stock symbols
+- Fetch real-time prices using Alpha Vantage API
+- Display current price and stock info
+
+Trade Page (Protected):
+- Simulated Buy/Sell operations
+- Validate:
+  - Enough virtual balance for buy
+  - Enough stock quantity for sell
+- Save every transaction
+
+Portfolio Page (Protected):
+- Show owned stocks
+- Quantity
+- Average buy price
+- Current market value (live price)
+
+Logout:
+- Firebase sign-out
+- Redirect to Home or Login
+
+────────────────────────────────────────
+4. FIRESTORE DATA STRUCTURE
+────────────────────────────────────────
+Use Firestore collections similar to relational tables.
+
+users:
+- user_id (Firebase UID)
+- name
+- email
+- username
+- created_at
+
+sessions (optional):
+- user_id
+- session_token
+- login_timestamp
+
+portfolios:
+- user_id
+- stock_symbol
+- quantity
+- average_price
+
+transactions:
+- user_id
+- stock_symbol
+- transaction_type (buy/sell)
+- price
+- quantity
+- timestamp
+
+stock_cache (optional):
+- stock_symbol
+- last_price
+- last_updated
+
+────────────────────────────────────────
+5. STOCK DATA INTEGRATION
+────────────────────────────────────────
+- Use Firebase Cloud Functions to call Alpha Vantage API
+- Fetch:
+  - Real-time stock prices
+  - Historical daily closing prices
+- Cache results to reduce API calls
+- Ensure portfolio valuation reflects live prices
+
+────────────────────────────────────────
+6. MACHINE LEARNING MODULE (EDUCATIONAL)
+────────────────────────────────────────
+Implement a simple Linear Regression model.
+
+ML Logic:
+- Input: Historical closing prices
+- Output: Next-day predicted price
+- Use basic mathematical linear regression
+- Clearly label predictions as educational only
+
+Graph Requirements:
+- Stock-trading style line graph
+- X-axis: Date
+- Y-axis: Price
+- Lines:
+  - Actual prices
+  - Predicted prices
+- Graph should resemble real trading charts
+
+────────────────────────────────────────
+7. FRONTEND REQUIREMENTS
+────────────────────────────────────────
+- Simple, clean UI
+- Responsive layout
+- Clear navigation
+- Professional-looking charts
+- Authentication-based page protection everywhere
+
+────────────────────────────────────────
+8. DISCLAIMER (MANDATORY)
+────────────────────────────────────────
+Display on:
+- Home page
+- Dashboard
+- ML Prediction page
+
+"This platform is a stock trading simulation system for educational purposes only.
+It does not involve real money and does not provide financial or investment advice."
+
+────────────────────────────────────────
+9. PROTOTYPE SCOPE
+────────────────────────────────────────
+- Single-user flow is enough
+- Focus on security, correctness, and clarity
+- Use mock virtual balance
+- ML must be simple and explainable
+- End-to-end flow must work for demo
+
+Generate:
+- Firebase project setup
+- Authentication logic
+- Firestore schema
+- Cloud Functions
+- Frontend files
+- Sample data where needed
